@@ -1,0 +1,20 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.linear_model import LinearRegression
+advertising = np.array([100000, 120000, 140000, 160000, 220000])
+sales = np.array([100000, 120000, 140000, 160000, 220000])
+advertising = advertising.reshape(-1, 1)
+sales = sales.reshape(-1, 1)
+model = LinearRegression()
+model.fit(advertising, sales)
+next_year = np.array([[80]])
+predicted_sales = model.predict(next_year)
+print(f'Predicted sales for the next year: {predicted_sales[0, 0]}')
+plt.scatter(advertising, sales, color='blue', label='Actual Data')
+plt.plot(advertising, model.predict(advertising), color='red', label='Regression Line')
+plt.scatter(next_year, predicted_sales, color='green', marker='X', s=50, label='Next Year Prediction')
+plt.xlabel('Advertising')
+plt.ylabel('Sales')
+plt.title('Linear Regression Model')
+plt.legend()
+plt.show()
